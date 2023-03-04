@@ -4,7 +4,7 @@ import { questions } from '../data/questions'
 export const Questions = () => {
 
   const [ questionNumber, setQuestionNumber ] = useState(0)
-  const [ selectValue, setSelectValue ] = useState('')
+  const [ selectValue, setSelectValue ] = useState('selectSomething')
   const [ finishAlert, setFinishAlert ] = useState(false) 
   const [ correctAnswer, setCorrectAnswer ] = useState(false)
   const [ wrongAnswer, setWrongAnswer ] = useState(false)
@@ -26,7 +26,10 @@ export const Questions = () => {
         if (selectValue === answer.id && answer.hasOwnProperty('correct')) {
             return finishValidationExecution()
             }
-            else if (selectValue !== answer.id && !answer.hasOwnProperty('correct')) {
+            else if (selectValue === 'selectSomething') {
+                return alert('Por favor, elige una opción para continuar')
+            }
+            else {
                 setWrongAnswer(true) 
                 } 
             }
@@ -40,18 +43,18 @@ export const Questions = () => {
                 <select value={selectValue} onChange={(e) => {
                     setSelectValue(e.target.value) 
                 }}>
-                    <option>Seleccione una opción</option>
+                    <option value='selectSomething'>Seleccione una opción</option>
                     {answers.map(answer => {
                         return <option value={answer.id} key={answer.id}>{answer.text}</option>
                     })}
                 </select>
                 <button onClick={validateAnswer} style={{marginLeft: '1rem'}}>Enviar</button>
-                { correctAnswer && <h2 style={{backgroundColor: 'green', padding: '10px', borderRadius: '10px'}}>¡Respuesta correcta! 💪</h2> }
+                { correctAnswer && <div><h2 style={{backgroundColor: 'green', padding: '10px', borderRadius: '10px'}}>¡Respuesta correcta! 💪</h2><p>Espera por favor...</p></div> }
                 { wrongAnswer && <h2 style={{backgroundColor: 'red', padding: '10px', borderRadius: '10px'}}>Respuesta incorrecta 😥</h2>}
         </div> }
         { finishAlert && 
         <div>
-            <h1>Felicitaciones terminaste el cuestionario! 😁</h1> 
+            <h1>Felicitaciones, terminaste el cuestionario! 😁</h1> 
             <button onClick={ () => {window.location.reload(true)} }>Volver a empezar</button>
         </div> }
     </>

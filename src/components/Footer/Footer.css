@@ -1,0 +1,15 @@
+@font-face {
+    font-family: remachine;
+    src: url('../../assets/fonts/RemachineScript_Personal_Use.ttf');
+}
+
+footer {
+    margin-top: 5%;
+    font-size: .7rem;
+    align-self: self-end;
+}
+
+.made-jopay {
+    font-size: 1.5rem;
+    font-family: remachine;
+}
